@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteBase /backend_anime/api/
+
+# Routing: arahkan semua request ke index.php atau file yang cocok
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^get-by-id/([a-zA-Z0-9\-]+)$ get-by-id.php/$1 [L,QSA]
