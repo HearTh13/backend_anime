@@ -1,6 +1,7 @@
 package com.perusahaanx.nonton_anime.controllers;
 
 import com.perusahaanx.nonton_anime.models.response.jikan.Anime;
+import com.perusahaanx.nonton_anime.models.response.jikan.AnimeFullResponse;
 import com.perusahaanx.nonton_anime.models.response.jikan.AnimeResponse;
 import com.perusahaanx.nonton_anime.services.AnimeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class AnimeController {
             @RequestParam(required = false) String sort
     ) {
         return animeService.fetchAnimeList(page, limit, search, type, status, orderBy, sort);
+    }
+
+    @GetMapping("/{id}")
+    public Mono<AnimeFullResponse> getAnime(@PathVariable Integer id) {
+        return animeService.fetchAnimeById(id);
     }
 
 }

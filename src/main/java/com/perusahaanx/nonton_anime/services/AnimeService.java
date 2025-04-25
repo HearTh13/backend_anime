@@ -1,5 +1,6 @@
 package com.perusahaanx.nonton_anime.services;
 
+import com.perusahaanx.nonton_anime.models.response.jikan.AnimeFullResponse;
 import com.perusahaanx.nonton_anime.models.response.jikan.AnimeResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,7 @@ import reactor.core.publisher.Mono;
 @Service
 public class AnimeService {
 
-    private static final String JIKAN_API_URL = "https://api.jikan.moe/v4/anime?";
+    private static final String JIKAN_API_URL = "https://api.jikan.moe/v4/anime";
 
     @Autowired
     private WebClient webClient;
@@ -23,7 +24,7 @@ public class AnimeService {
             String orderBy,
             String sort
     ) {
-        String uri = JIKAN_API_URL;
+        String uri = JIKAN_API_URL+"?";
         if (page != null && limit != null) {
             uri += "page=" + page + "&limit=" + limit + "&";
         }
@@ -43,11 +44,17 @@ public class AnimeService {
             uri += "sort=" + sort + "&";
         }
         uri = uri.substring(0, uri.length() - 1);
-        System.out.println("uri: "+uri);
         return webClient.get()
                 .uri(uri)
                 .retrieve()
                 .bodyToMono(AnimeResponse.class);
     }
-
+    public Mono<AnimeFullResponse> fetchAnimeById(Integer id) {
+        String uri = JIKAN_API_URL+"/"+id+"/"+"full";
+        System.out.println("uri: "+uri);
+        return webClient.get()
+                .uri(uri)
+                .retrieve()
+                .bodyToMono(AnimeFullResponse.class);
+    }
 }

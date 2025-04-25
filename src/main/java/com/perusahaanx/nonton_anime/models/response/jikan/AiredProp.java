@@ -6,4 +6,5 @@ import lombok.Data;
 public class AiredProp {
     private AiredDate from;
     private AiredDate to;
+    private String string;
 }

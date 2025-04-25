@@ -3,10 +3,10 @@ package com.perusahaanx.nonton_anime.models.response.jikan;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
-public class Images {
+public class AnimeFullResponse {
     @JsonProperty
-    private ImageFormat jpg;
-    @JsonProperty
-    private ImageFormat webp;
+    private AnimeFull data;
 }
