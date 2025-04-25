@@ -7,7 +7,8 @@ import lombok.Data;
 public class Anime {
     @JsonProperty("mal_id")
     private int malId;
-
     @JsonProperty
     private String title;
+    @JsonProperty
+    private Images images;
 }
